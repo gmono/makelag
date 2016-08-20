@@ -13,5 +13,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Nodes">
+      <UniqueIdentifier>{bee0f9a2-76e4-4903-a2a2-8c8f32410590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Creater">
+      <UniqueIdentifier>{2725f439-69ce-4b1d-9bed-0d7e5a568843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Creater\LLVM">
+      <UniqueIdentifier>{799216fc-a8b3-4b4b-a54e-7f384dce9391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Creater\RUNER">
+      <UniqueIdentifier>{911bf3ff-09ed-4858-adce-a04b9c925fca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LLVMCreater.cpp">
+      <Filter>Creater\LLVM</Filter>
+    </ClCompile>
+    <ClCompile Include="Parse.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Node.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LLVMCreater.h">
+      <Filter>Creater\LLVM</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="说明.txt" />
   </ItemGroup>
 </Project>

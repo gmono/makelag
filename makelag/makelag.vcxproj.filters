@@ -42,6 +42,12 @@
     <ClCompile Include="Parse.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="LangParse.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Errors.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Node.h">

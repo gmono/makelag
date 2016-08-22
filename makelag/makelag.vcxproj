@@ -111,6 +111,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CreateBase.cpp" />
+    <ClCompile Include="Errors.cpp" />
+    <ClCompile Include="LangParse.cpp" />
     <ClCompile Include="LLVMCreater.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />

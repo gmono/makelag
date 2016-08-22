@@ -1,5 +1,0 @@
-
-void PrintError(int id)
-{
-
-}

@@ -111,7 +111,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CreateBase.cpp" />
-    <ClCompile Include="Errors.cpp" />
+    <ClCompile Include="Errors.h" />
     <ClCompile Include="LangParse.cpp" />
     <ClCompile Include="LLVMCreater.cpp" />
     <ClCompile Include="main.cpp" />
@@ -119,9 +119,13 @@
     <ClCompile Include="Parse.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="All.h" />
     <ClInclude Include="CreateBase.h" />
     <ClInclude Include="LLVMCreater.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="NodeMake.h" />
+    <ClInclude Include="NodeString.h" />
+    <ClInclude Include="转义字符处理.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="说明.txt" />

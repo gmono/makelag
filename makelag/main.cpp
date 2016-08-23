@@ -4,6 +4,7 @@
 #include "Node.h"
 #include "CreateBase.h"
 #include "LLVMCreater.h"
+#include <regex>
 using namespace std;
 extern Node *Parse(string codes);
 extern void ParseInit();
@@ -11,6 +12,14 @@ extern void ParseInit();
 CreateBase *cbr = new LLVMCreater();
 int main(int argc, char **argv)
 {
+	////
+	//cmatch cm;
+	//bool a=regex_match("subject",cm, regex("sub.*"));
+	//for (auto s : cm)
+	//{
+	//	cout << s.str() << endl;
+	//}
+	//cin.get();//以上是测试代码
 	cout << "Make Language 编译器(LLVM 0.1)" << endl;
 	ParseInit();
 	if (argc <= 1) {

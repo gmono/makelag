@@ -1,24 +1,66 @@
 #include <iostream>
 #include <string>
 #include <stack>
-#include "All.h"
+#include "All.hh"
 #include <map>
 #include <vector>
+#include <regex>
 #include "转义字符处理.h"
 extern void PrintError(int id);
 using namespace std;
 //以下为词元处理对象集合
 //每一词元类都有Make函数返回node指针
 map<string, Node *> nodes;
+map<regex *, Node *> regnodes;//基于正则表达式的 初始化时加入正则对象和node的对应关系
 void ParseInit()
 {
 	//nodes初始化
 	//字符串node不在其中
-	nodes["make"] = new NodeMake();
+	//处理标记类单词
+	vector<string> sigs{"make","of","with"};
+	auto snode=new NodeSignal();
+	for (string str : sigs)
+	{
+		nodes[str] = snode;//全都设置成Signal工厂对象
+	}
+
 }
 
 string line;//这是代码 暂时命名为line 历史遗留
+int nowptr = 0;//当前代码指针
+//从一串字符得到一个node
+Node* ParseOne(string dc)
+{
+	//此函数用来解析一般的单词 不包括字符串
+	//包括数字 但不包括表达式
+	if (nodes.find(dc) != nodes.end())
+	{
+		Node *tempnode = nodes[dc];//获得生成器对象
+		Node *node = tempnode->Make(dc);//获得node对象
+		return node;
+	}
+	else
+	{
+		Node *tempnode = nullptr;
+		for (auto v : regnodes)
+		{
+			regex *reg = v.first;
+			if (regex_match(dc, *reg))
+			{
+				tempnode = v.second;
+				break;//找到一个符合的node就退出
+			}
+		}
+		if (tempnode == nullptr)
+			return nullptr;//如果没有找到对应的node就返回nullptr
+		//找到了就得到对象
+		Node *node = tempnode->Make(dc);//得到对象
+		return node;
+	}
+	return nullptr;//如果啥都没找到就返回nullptr
+}
 
+#pragma region  从代码中得到一个line（意义单元）
 bool isinstring = false;
 bool 是否无转义 = false;
 vector<Node *> ParseLine()
@@ -26,7 +68,7 @@ vector<Node *> ParseLine()
 	//此函数的作用是分析每一行 跳过空字符 得到每个词元 并传递给特定的解析器
 	vector<Node *> ret;
 	string dc;
-	for (int i = 0; i < line.length(); ++i)
+	for (int &i=nowptr; i < line.length(); ++i)
 	{
 		if (line[i] == '@')
 		{
@@ -44,15 +86,12 @@ vector<Node *> ParseLine()
 				//调用对应的make函数
 				if (isinstring)
 				{
-					if(nodes.find(dc) == nodes.end())
-						PrintError(0); //单词不可预知 0号错误
-					else
-					{
-						Node *tempnode = nodes[dc];//获得生成器对象
-						Node *node = tempnode->Make(dc);//获得node对象
-						ret.push_back(node);//将对象加入返回列表
-						dc.clear();
-					}
+					//这是进入字符串时的情况 考虑字符串之前存在的单词 内如 make“aaaa” 则此处处理make
+					Node *node = ParseOne(dc);//得到对象
+					if (node == nullptr) PrintError(0);//因为printerror会exit所以不需要else
+					//没有退出就代表node不为node
+					ret.push_back(node); //对象加入返回列表
+					dc.clear();
 				}
 				else
 				{
@@ -90,13 +129,11 @@ vector<Node *> ParseLine()
 			if (dc != "")
 			{
 				//调用对应的make函数
-				if (nodes.find(dc) == nodes.end())
-				{
-					PrintError(0);//0号错误 单词不可预知
-				}
-				Node *tempnode = nodes[dc];//获得生成器对象
-				Node *node = tempnode->Make(dc);//获得node对象
-				ret.push_back(node);//将对象加入返回列表
+				//这里是遇到正常的空格和换行时得到一个单词的处理
+				Node *node = ParseOne(dc);//得到对象
+				if (node == nullptr) PrintError(0);//因为printerror会exit所以不需要else
+												   //没有退出就代表node不为node
+				ret.push_back(node); //对象加入返回列表
 				dc.clear();
 			}
 			if (line[i] == '\n') return ret;//如果此处是换行 就返回一个line
@@ -109,6 +146,7 @@ vector<Node *> ParseLine()
 	}
 	throw 0;
 }
+#pragma endregion
 extern Node *root;
 extern void ParseLang(vector<Node *> ns);
 ///解析器
@@ -121,6 +159,7 @@ Node *Parse(string codes)
 	{
 		try
 		{
+			if (nowptr == codes.length()) return nullptr;
 			auto list=ParseLine();
 			ParseLang(list);
 		}

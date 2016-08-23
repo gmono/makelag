@@ -15,7 +15,7 @@
     </Filter>
     <Filter Include="Nodes">
       <UniqueIdentifier>{bee0f9a2-76e4-4903-a2a2-8c8f32410590}</UniqueIdentifier>
-      <Extensions>Node*.h;Node*.cpp</Extensions>
+      <Extensions>*.hh</Extensions>
     </Filter>
     <Filter Include="Creater">
       <UniqueIdentifier>{2725f439-69ce-4b1d-9bed-0d7e5a568843}</UniqueIdentifier>
@@ -47,7 +47,7 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Errors.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,16 +60,16 @@
     <ClInclude Include="LLVMCreater.h">
       <Filter>Creater\LLVM</Filter>
     </ClInclude>
-    <ClInclude Include="NodeString.h">
-      <Filter>Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="All.h">
-      <Filter>Nodes</Filter>
-    </ClInclude>
     <ClInclude Include="转义字符处理.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="NodeMake.h">
+    <ClInclude Include="All.hh">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeString.hh">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeSignal.hh">
       <Filter>Nodes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -119,12 +119,12 @@
     <ClCompile Include="Parse.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="All.h" />
+    <ClInclude Include="All.hh" />
     <ClInclude Include="CreateBase.h" />
     <ClInclude Include="LLVMCreater.h" />
     <ClInclude Include="Node.h" />
-    <ClInclude Include="NodeMake.h" />
-    <ClInclude Include="NodeString.h" />
+    <ClInclude Include="NodeSignal.hh" />
+    <ClInclude Include="NodeString.hh" />
     <ClInclude Include="转义字符处理.h" />
   </ItemGroup>
   <ItemGroup>
